@@ -1,4 +1,4 @@
--- Change default terminal emulator to zsh
+vim.g.mapleader = " "  -- Set <leader> to Space
 
 -- General settings
 vim.o.number = true	      -- Show line numbers
@@ -41,10 +41,12 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
 
+-- Keymaps
+require("keymaps")
+
 -- statusline
 require("lualine").setup()
 require("config")
-require("keymaps")
 require("config.nvim_cmp")  -- Ensure this line exists in your init.lua
 require("lsp_config")
 
