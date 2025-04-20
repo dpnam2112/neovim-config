@@ -3,11 +3,38 @@ local lspconfig = require('lspconfig')
 lspconfig.lua_ls.setup {}
 lspconfig.clangd.setup {}
 lspconfig.pyright.setup {
-	on_attach = on_attach
+    on_attach = on_attach
 }
-lspconfig.tsserver.setup {
-	on_attach = on_attach
+
+lspconfig.rust_analyzer.setup{
+  cmd = { "rust-analyzer" },
+  on_attach = on_attach,
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = true;
+      }
+    }
+  }
 }
+
+-- The below configuration is from the following Reddit post: https://www.reddit.com/r/neovim/comments/1g4e3sa/finally_neovim_native_vue_lsp_perfection_2024
+lspconfig.ts_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  init_options = {
+    plugins = { -- I think this was my breakthrough that made it work
+      {
+        name = "@vue/typescript-plugin",
+        location = "/home/linuxbrew/.linuxbrew/lib/node_modules/@vue/language-server",
+        languages = { "vue" },
+      },
+    },
+  },
+  filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+}
+
+lspconfig.volar.setup {}
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

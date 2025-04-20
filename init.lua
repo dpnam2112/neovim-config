@@ -45,6 +45,18 @@ require("lazy").setup("plugins")
 require("lualine").setup()
 require("config")
 require("keymaps")
--- require("lsp_config")
+require("config.nvim_cmp")  -- Ensure this line exists in your init.lua
+require("lsp_config")
+
+-- Set tabs for Go files
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "go",
+    callback = function()
+        vim.opt_local.expandtab = false  -- Use tabs, not spaces
+        vim.opt_local.tabstop = 4        -- Tab width = 4 spaces
+        vim.opt_local.shiftwidth = 4     -- Indentation level
+        vim.opt_local.softtabstop = 4    -- Makes Tab and Backspace work properly
+    end
+})
 
 vim.cmd.colorscheme "catppuccin"
