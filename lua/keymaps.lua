@@ -22,7 +22,7 @@ local telescope_builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", telescope_builtin.find_files, { desc = "Find files" })
 
 -- Open buffer list
-vim.keymap.set("n", "<C-b>", telescope_builtin.buffers, { desc = "Open buffers (Telescope)" })
+vim.keymap.set("n", "<C-bl>", telescope_builtin.buffers, { desc = "Open buffers (Telescope)" })
 
 -- Live grep across files
 vim.keymap.set("n", "<C-f>", telescope_builtin.live_grep, { desc = "Search in files (grep)" })
