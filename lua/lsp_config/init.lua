@@ -1,5 +1,8 @@
 local lspconfig = require("lspconfig")
 
+GLOBAL_NODE_MODULES_PATH = "/home/linuxbrew/.linuxbrew/lib/node_modules/"
+TSDK_PATH = GLOBAL_NODE_MODULES_PATH .. "typescript/lib/"
+
 lspconfig.lua_ls.setup({})
 lspconfig.clangd.setup({})
 lspconfig.pyright.setup({
@@ -26,15 +29,30 @@ lspconfig.ts_ls.setup({
 		plugins = { -- I think this was my breakthrough that made it work
 			{
 				name = "@vue/typescript-plugin",
-				location = "/home/linuxbrew/.linuxbrew/lib/node_modules/@vue/language-server",
+				location = GLOBAL_NODE_MODULES_PATH .. "/@vue/language-server",
+				tsdk = TSDK_PATH,
 				languages = { "vue" },
 			},
 		},
 	},
-	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
 })
 
-lspconfig.volar.setup({})
+-- Hybrid mode is disabled means letting Volar handles everything: typescript, template, styles
+-- instead of coordinating with other LSPs like ts_ls
+lspconfig.volar.setup({
+  filetypes = { "vue" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+  init_options = {
+    typescript = {
+      tsdk = TSDK_PATH,
+    },
+    vue = {
+      hybridMode = false
+    },
+  },
+})
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

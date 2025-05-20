@@ -1,4 +1,5 @@
 -- Set up nvim-cmp.
+
 local cmp = require("cmp")
 
 cmp.setup({
@@ -82,3 +83,4 @@ require("lspconfig")["gopls"].setup({
 require("lspconfig")["dockerls"].setup({
 	capabilities = capabilities,
 })
+
