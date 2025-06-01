@@ -1,8 +1,5 @@
 local lspconfig = require("lspconfig")
 
-GLOBAL_NODE_MODULES_PATH = "/home/linuxbrew/.linuxbrew/lib/node_modules/"
-TSDK_PATH = GLOBAL_NODE_MODULES_PATH .. "typescript/lib/"
-
 lspconfig.lua_ls.setup({})
 lspconfig.clangd.setup({})
 lspconfig.pyright.setup({
@@ -25,16 +22,6 @@ lspconfig.rust_analyzer.setup({
 lspconfig.ts_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
-	init_options = {
-		plugins = { -- I think this was my breakthrough that made it work
-			{
-				name = "@vue/typescript-plugin",
-				location = GLOBAL_NODE_MODULES_PATH .. "/@vue/language-server",
-				tsdk = TSDK_PATH,
-				languages = { "vue" },
-			},
-		},
-	},
 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
 })
 
@@ -45,9 +32,6 @@ lspconfig.volar.setup({
   capabilities = capabilities,
   on_attach = on_attach,
   init_options = {
-    typescript = {
-      tsdk = TSDK_PATH,
-    },
     vue = {
       hybridMode = false
     },

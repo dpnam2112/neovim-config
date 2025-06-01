@@ -49,6 +49,13 @@ require("lualine").setup()
 require("config")
 require("config.nvim_cmp") -- Ensure this line exists in your init.lua
 require("lsp_config")
+require("nvim-treesitter.configs").setup {
+  ensure_installed = { "html", "vue", "javascript", "typescript" },
+  autotag = {
+    enable = true,
+  },
+}
+
 
 -- Set tabs for Go files
 vim.api.nvim_create_autocmd("FileType", {
