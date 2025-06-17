@@ -69,3 +69,16 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.cmd.colorscheme("catppuccin")
+
+
+-- This enables virtual text, signs, underline, etc.
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = '●', -- or '' or '■'
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
