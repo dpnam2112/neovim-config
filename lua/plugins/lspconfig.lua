@@ -12,17 +12,17 @@ return {
 
       -- Set defaults for ALL servers
       vim.lsp.config("*", {
-	capabilities = capabilities,
+        capabilities = capabilities,
       })
 
       -- per-server tweaks
       vim.lsp.config("lua_ls", {
-	settings = {
-	  Lua = {
-	    diagnostics = { globals = { "vim" } },
-	    workspace = { checkThirdParty = false },
-	  },
-	},
+        settings = {
+          Lua = {
+            diagnostics = { globals = { "vim" } },
+            workspace = { checkThirdParty = false },
+          },
+        },
       })
 
       -- enable servers

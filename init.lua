@@ -22,10 +22,7 @@ vim.o.ruler = true -- Show row and column ruler information
 vim.o.undolevels = 1000 -- Number of undo levels
 vim.o.backspace = "indent,eol,start" -- Backspace behavior
 
-vim.opt.shiftwidth = 2
-
 -- lazy.nvim configuration
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -44,16 +41,9 @@ require("lazy").setup("plugins")
 -- Keymaps
 require("keymaps")
 
--- Set tabs for Go files
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  callback = function()
-    vim.opt_local.expandtab = false -- Use tabs, not spaces
-    vim.opt_local.tabstop = 4 -- Tab width = 4 spaces
-    vim.opt_local.shiftwidth = 4 -- Indentation level
-    vim.opt_local.softtabstop = 4 -- Makes Tab and Backspace work properly
-  end,
-})
+-- config
+require("config")
+
 
 vim.cmd.colorscheme("catppuccin")
 
