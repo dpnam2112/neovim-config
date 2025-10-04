@@ -1,46 +1,45 @@
-# 🧠 Neovim Setup Reference
+# 🧠 Neovim Setup Guide
 
-This config is tailored for a modern Neovim development experience with LSP, autocompletion, theming, fuzzy finding, and file browsing. Here's a breakdown of what each part does and how to modify them if needed.
+This config is for a modern Neovim dev workflow with LSP, completion, theming, fuzzy finding, and file browsing.
 
 ---
 
-## 🔧 Folder Structure
+## 🔧 Directory Structure
 
 ```
 lua/
-  config/        -- Theme, completion, mason setup
-  lsp_config/    -- LSP server setup
-  plugins/       -- Plugin list via lazy.nvim
-  keymaps.lua    -- All keybindings
-init.lua         -- Main entrypoint
+  plugins/       -- Plugin definitions (lazy.nvim)
+    nvim_cmp/    -- Autocompletion setup
+    lspconfig.lua -- LSP setup
+    mason.lua     -- LSP/DAP installer
+    lualine.lua   -- Statusline
+    catppuccin.nvim.lua -- Theme
+    nvim_tree.lua -- File explorer
+    telescope.lua -- Fuzzy finder
+    treesitter.lua -- Syntax highlighting
+    ts_autotag.lua -- Autotag plugin
+    ts_tools.lua   -- TypeScript tools
+  keymaps.lua    -- Keybindings
+init.lua         -- Entry point
 ```
 
 ---
 
-## 📦 Plugins & Features
+## 📦 Plugins
 
-### Plugin Manager
-
-- **lazy.nvim**: Used as the plugin manager. Auto-installs if missing.
-
-### LSP
-
-- `nvim-lspconfig` for configuring language servers.
-- `mason.nvim` for managing LSP binaries.
-- `cmp-nvim-lsp`, `nvim-cmp`, and `LuaSnip` for autocompletion.
-
-### UI & Theming
-
-- `catppuccin` and `tokyonight` themes (set via `init.lua`)
-- `lualine.nvim` for statusline
-- `nvim-tree` for file explorer
-- `telescope.nvim` and `fzf.vim` for fuzzy finding
+* **lazy.nvim**: Plugin manager
+* **LSP**: `nvim-lspconfig`, `mason.nvim`
+* **Completion**: `nvim-cmp`, `LuaSnip`, `cmp-nvim-lsp`
+* **UI**: `catppuccin`, `tokyonight`, `lualine.nvim`
+* **Navigation**: `nvim-tree`, `telescope.nvim`, `fzf.vim`
+* **Syntax**: `nvim-treesitter`, `nvim-ts-autotag`
 
 ---
 
 ## 🎨 Themes
 
-Edit this line in `init.lua` to switch theme:
+In `init.lua`, set your theme:
+
 ```lua
 vim.cmd.colorscheme("catppuccin")
 -- or: vim.cmd.colorscheme("tokyonight")
@@ -50,56 +49,32 @@ vim.cmd.colorscheme("catppuccin")
 
 ## 💡 Keymaps
 
-Located in `lua/keymaps.lua`. Highlights:
+Defined in `lua/keymaps.lua`. Highlights:
 
-| Keybinding     | Action                                |
-|----------------|----------------------------------------|
-| `<C-p>`        | Find files (Telescope)                |
-| `<C-b>`        | Toggle file tree / open buffers       |
-| `<C-f>`        | Grep in files                         |
-| `<leader>:`    | Open command palette (Telescope)      |
-| `gd`           | Go to definition (in new tab)         |
-| `<leader>xx`   | Show diagnostics                      |
-
----
-
-## ⚙️ File-specific Settings
-
-For Go files:
-```lua
-vim.opt_local.expandtab = false
-vim.opt_local.tabstop = 4
-```
+| Key          | Action                 |
+| ------------ | ---------------------- |
+| `<C-p>`      | Find files (Telescope) |
+| `<C-b>`      | Toggle file tree       |
+| `<C-f>`      | Live grep              |
+| `<leader>:`  | Command palette        |
+| `gd`         | Go to definition (tab) |
+| `<leader>xx` | Show diagnostics       |
 
 ---
 
-## 🛠 Adding New LSP Servers
+## ⚙️ External Dependencies
 
-1. Install via Mason:  
-   `:Mason`
+Some plugins require external tools:
 
-2. Add to `lua/lsp_config/init.lua`:
-```lua
-lspconfig.<server_name>.setup({
-  capabilities = capabilities,
-})
-```
-
-3. Done ✅
-
----
-
-## ✨ Autocompletion
-
-- Powered by `nvim-cmp` and `LuaSnip`
-- Config at: `lua/config/nvim_cmp.lua`
-- To add new sources or snippet engine, edit this file
+* **Clipboard**: `xclip` (Linux), `pbcopy` (macOS), or `win32yank` (Windows)
+* **FZF**: Install `fzf` binary for `fzf.vim`
+* **LSP servers**: Install via `:Mason`
 
 ---
 
 ## 🚀 Setup
 
-Clone the repo or copy the files into your `~/.config/nvim`
+Clone repo into `~/.config/nvim`:
 
 ```sh
 git clone <this-repo> ~/.config/nvim
@@ -108,20 +83,8 @@ nvim
 
 ---
 
-## 🧪 Troubleshooting Tips
+## 🛠 Troubleshooting
 
-- `:LspInfo`: Check active LSP clients
-- `:checkhealth`: Diagnostic for broken plugins
-- Delete `.local/share/nvim` if something's broken beyond repair
-
----
-
-## ✅ TODO
-
-- [ ] Add Treesitter config
-- [ ] Add formatting/diagnostics tools via null-ls
-- [ ] Setup debugger (DAP)
-
----
-
-Made with ❤️ for future me.
+* `:LspInfo` → Check active LSP clients
+* `:checkhealth` → Diagnose plugin issues
+* If broken, clear `~/.local/share/nvim` and restart
