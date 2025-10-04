@@ -45,7 +45,6 @@ require("lazy").setup("plugins")
 require("keymaps")
 
 -- statusline
-require("lsp_config")
 require("nvim-treesitter.configs").setup {
   ensure_installed = { "html", "vue", "javascript", "typescript" },
   autotag = {
