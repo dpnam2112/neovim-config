@@ -28,14 +28,14 @@ vim.opt.shiftwidth = 2
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -55,13 +55,13 @@ require("nvim-treesitter.configs").setup {
 
 -- Set tabs for Go files
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "go",
-	callback = function()
-		vim.opt_local.expandtab = false -- Use tabs, not spaces
-		vim.opt_local.tabstop = 4 -- Tab width = 4 spaces
-		vim.opt_local.shiftwidth = 4 -- Indentation level
-		vim.opt_local.softtabstop = 4 -- Makes Tab and Backspace work properly
-	end,
+  pattern = "go",
+  callback = function()
+    vim.opt_local.expandtab = false -- Use tabs, not spaces
+    vim.opt_local.tabstop = 4 -- Tab width = 4 spaces
+    vim.opt_local.shiftwidth = 4 -- Indentation level
+    vim.opt_local.softtabstop = 4 -- Makes Tab and Backspace work properly
+  end,
 })
 
 vim.cmd.colorscheme("catppuccin")
