@@ -44,15 +44,6 @@ require("lazy").setup("plugins")
 -- Keymaps
 require("keymaps")
 
--- statusline
-require("nvim-treesitter.configs").setup {
-  ensure_installed = { "html", "vue", "javascript", "typescript" },
-  autotag = {
-    enable = true,
-  },
-}
-
-
 -- Set tabs for Go files
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "go",
