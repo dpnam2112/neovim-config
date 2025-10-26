@@ -25,11 +25,28 @@ return {
         },
       })
 
+      vim.lsp.config("yamlls", {
+        capabilities = capabilities,
+        cmd = { "yaml-language-server", "--stdio" },
+        filetypes = { "yaml", "yml" },
+      })
+
+      vim.lsp.config("helm_ls", {
+      cmd = { "helm_ls", "serve" },
+        filetypes = { "helm", "yaml" },
+        root_dir = vim.fs.root(0, { "Chart.yaml" }),
+        yamlls = {
+          path = "yaml-language-server"
+        }
+      })
+
       -- enable servers
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("ts_ls")
       vim.lsp.enable("clangd")
       vim.lsp.enable("pyright")
+      vim.lsp.enable("helm_ls")
+      vim.lsp.enable("yamlls")
     end,
   },
 }
