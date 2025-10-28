@@ -40,6 +40,13 @@ return {
         }
       })
 
+      vim.lsp.config("terraformls", {
+        cmd = { "terraform-ls", "serve" },
+        filetypes = { "terraform", "tf", "hcl", "tfvars" },
+        root_dir = vim.fs.root(0, { ".terraform", ".git", "*.tf" }),
+        capabilities = capabilities,
+      })
+
       -- enable servers
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("ts_ls")
@@ -47,6 +54,7 @@ return {
       vim.lsp.enable("pyright")
       vim.lsp.enable("helm_ls")
       vim.lsp.enable("yamlls")
+      vim.lsp.enable("terraformls")
     end,
   },
 }
