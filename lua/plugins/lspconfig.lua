@@ -47,6 +47,32 @@ return {
         capabilities = capabilities,
       })
 
+      vim.lsp.config("ansiblels", {
+        cmd = { "ansible-language-server", "--stdio" },
+        filetypes = { "yaml", "ansible" },
+        root_dir = vim.fs.root(0, { "ansible.cfg", ".ansible-lint", ".git" }),
+        settings = {
+          ansible = {
+            ansible = {
+              -- Optionally specify a custom Ansible path
+              -- path = "/usr/bin/ansible",
+            },
+            python = {
+              interpreterPath = "python3",
+            },
+            validation = {
+              enabled = true,
+              lint = {
+                enabled = true,
+                path = "ansible-lint",
+              },
+            },
+          },
+        },
+        capabilities = capabilities,
+      })
+
+
       -- enable servers
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("ts_ls")
@@ -55,6 +81,7 @@ return {
       vim.lsp.enable("helm_ls")
       vim.lsp.enable("yamlls")
       vim.lsp.enable("terraformls")
+      vim.lsp.enable("ansiblels")
     end,
   },
 }
