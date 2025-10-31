@@ -43,14 +43,14 @@ return {
       vim.lsp.config("terraformls", {
         cmd = { "terraform-ls", "serve" },
         filetypes = { "terraform", "tf", "hcl", "tfvars" },
-        root_dir = vim.fs.root(0, { ".terraform", ".git", "*.tf" }),
+        root_dir = vim.fs.root(0, { ".terraform", "*.tf" }),
         capabilities = capabilities,
       })
 
       vim.lsp.config("ansiblels", {
         cmd = { "ansible-language-server", "--stdio" },
         filetypes = { "yaml", "ansible" },
-        root_dir = vim.fs.root(0, { "ansible.cfg", ".ansible-lint", ".git" }),
+        root_dir = vim.fs.root(0, { "ansible.cfg", ".ansible-lint" }),
         settings = {
           ansible = {
             ansible = {
@@ -78,11 +78,22 @@ return {
       vim.lsp.enable("ts_ls")
       vim.lsp.enable("clangd")
       vim.lsp.enable("pyright")
-      vim.lsp.enable("helm_ls")
-      vim.lsp.enable("yamlls")
       vim.lsp.enable("terraformls")
-      vim.lsp.enable("ansiblels")
-    end,
+      vim.lsp.enable("yamlls")
+
+      -- These DSLs are yaml-based
+      local root_markers = {
+        helm_ls = { "Chart.yaml" },
+        terraformls = { ".terraform", "*.tf" },
+        ansiblels = { "ansible.cfg", ".ansible-lint" }
+      }
+
+      for langserver, root_marker in pairs(root_markers) do
+        if vim.fs.root(0, root_marker) ~= nil then
+          vim.lsp.enable(langserver)
+        end
+      end
+    end
   },
 }
 
