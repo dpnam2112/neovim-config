@@ -25,6 +25,25 @@ return {
         },
       })
 
+      vim.lsp.config("gopls", {
+        cmd = { "gopls" },
+        filetypes = { "go", "gomod", "gowork", "gotmpl" },
+        root_dir = vim.fs.root(0, { "go.work", "go.mod", ".git" }),
+        capabilities = capabilities,
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+              shadow = true,
+            },
+            staticcheck = true,
+            usePlaceholders = true,
+            completeUnimported = true,
+            gofumpt = true,
+          },
+        },
+      })
+
       vim.lsp.config("yamlls", {
         capabilities = capabilities,
         cmd = { "yaml-language-server", "--stdio" },
@@ -80,6 +99,7 @@ return {
       vim.lsp.enable("pyright")
       vim.lsp.enable("terraformls")
       vim.lsp.enable("yamlls")
+      vim.lsp.enable("gopls")
 
       -- These DSLs are yaml-based
       local root_markers = {
