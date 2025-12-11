@@ -10,6 +10,10 @@ return {
         dark = "mocha",
       },
       transparent_background = true,
+      custom_highlights = {
+        NormalFloat = { bg = "none" },
+        TelescopeBorder = { bg = "none" }
+      },
       show_end_of_buffer = false,
       term_colors = true,
       dim_inactive = {
