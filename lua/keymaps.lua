@@ -13,7 +13,7 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 local telescope_builtin = require("telescope.builtin")
 
 -- VSCode-like file finder
-vim.keymap.set("n", "<C-p>", telescope_builtin.find_files, { desc = "Find files" })
+vim.keymap.set("n", "<C-p>", "<cmd>Files<CR>", { desc = "Find files" })
 
 -- Open buffer list
 vim.keymap.set("n", "<C-bl>", telescope_builtin.buffers, { desc = "Open buffers (Telescope)" })
@@ -30,3 +30,8 @@ vim.keymap.set("n", "<leader>fr", telescope_builtin.oldfiles, { desc = "Recent f
 vim.keymap.set("n", "<leader>fg", telescope_builtin.git_files, { desc = "Git files" })
 vim.keymap.set("n", "<leader>ss", telescope_builtin.lsp_document_symbols, { desc = "Document symbols" })
 vim.keymap.set("n", "<leader>xx", telescope_builtin.diagnostics, { desc = "Diagnostics" })
+
+-- Press 'gl' to show the full diagnostic message in a floating window
+vim.keymap.set('n', 'gl', vim.diagnostic.open_float)
+-- Press <leader>rs (Reload Source) to refresh config
+vim.keymap.set('n', '<leader>rs', ':source $MYVIMRC<CR>', { desc = 'Reload config' })
