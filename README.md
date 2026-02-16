@@ -49,16 +49,7 @@ vim.cmd.colorscheme("catppuccin")
 
 ## 💡 Keymaps
 
-Defined in `lua/keymaps.lua`. Highlights:
-
-| Key          | Action                 |
-| ------------ | ---------------------- |
-| `<C-p>`      | Find files (Telescope) |
-| `<C-b>`      | Toggle file tree       |
-| `<C-f>`      | Live grep              |
-| `<leader>:`  | Command palette        |
-| `gd`         | Go to definition (tab) |
-| `<leader>xx` | Show diagnostics       |
+Defined in `lua/keymaps.lua`.
 
 ---
 

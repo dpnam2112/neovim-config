@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Set tabs for Go files
+-- Set tabs for Lua files
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
   callback = function()
